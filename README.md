@@ -106,18 +106,7 @@ cp -r ~/.config/nvim ~/distrobox/ros-jazzy-home/.config/
 
 ```
 
-### 9. Workspace Auto-Sourcing
-
-To automatically source your specific workspace (e.g., Armbot), add this logic to your container's `.bashrc`.
-
-```bash
-if [ -f "$HOME/armbot/install/setup.bash" ]; then
-    source "$HOME/armbot/install/setup.bash"
-fi
-
-```
-
-### 10. Shared Clipboard Support
+### 9. Shared Clipboard Support
 
 Install `wl-clipboard` on both systems and configure Neovim to use the system clipboard.
 
@@ -142,12 +131,23 @@ vim.opt.clipboard = "unnamedplus"
 
 ```
 
-### 11. Hyprland Keybinds
+### 10. Hyprland Keybinds
 
 Add these shortcuts to your `hyprland.conf` or `bindings.conf` for quick access. A system restart is required for changes to take effect.
 
 ```bash
 bindd = SUPER SHIFT, U, Ubuntu Neovim, exec, uwsm-app -- xdg-terminal-exec sh -c "distrobox enter ros-jazzy -- nvim"
 bindd = SUPER, BACKSLASH, Ubuntu Shell, exec, uwsm-app -- xdg-terminal-exec sh -c "distrobox enter ros-jazzy"
+
+```
+
+### 11. Workspace Auto-Sourcing to have any packages ready
+
+To automatically source your specific workspace (e.g., Armbot), add this logic to your container's `.bashrc`.
+
+```bash
+if [ -f "$HOME/armbot/install/setup.bash" ]; then
+    source "$HOME/armbot/install/setup.bash"
+fi
 
 ```
