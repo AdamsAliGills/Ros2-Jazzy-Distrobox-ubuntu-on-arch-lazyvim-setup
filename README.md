@@ -98,7 +98,7 @@ sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find -y
 
 ```
 
-Migrate your existing Arch Neovim configuration to the container's home directory.
+Now in arch terminal migrate your existing Arch Neovim configuration to the container's home directory.
 
 ```bash
 mkdir -p ~/distrobox/ros-jazzy-home/.config
