@@ -47,6 +47,8 @@ distrobox enter ros-jazzy
 ### 5. Install ROS 2 Jazzy
 
 Configure locales and the ROS 2 repository, then install the desktop suite.
+System Files (/opt/ros/): These are the tools (like ros2, rviz2, and gazebo) installed by the apt commands.
+They stay in the root directory to ensure stability and shared access.
 
 ```bash
 sudo apt update && sudo apt install locales -y
