@@ -96,16 +96,12 @@ Install Neovim and dependencies inside the container.
 ```bash
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
-sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find -y
-
+sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find unzip -y
 ```
 
-Now in arch terminal migrate your existing Arch Neovim configuration to the container's home directory.
 
 ```bash
-mkdir -p ~/distrobox/ros-jazzy-home/.config
-cp -r ~/.config/nvim ~/distrobox/ros-jazzy-home/.config/
-
+git clone https://github.com/LazyVim/starter ~/.config/nvim
 ```
 
 ### 9. Shared Clipboard Support
