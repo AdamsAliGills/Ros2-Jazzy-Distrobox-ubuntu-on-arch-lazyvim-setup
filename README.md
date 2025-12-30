@@ -94,16 +94,27 @@ gz sim empty.sdf
 Install Neovim and dependencies inside the container.
 
 ```bash
+# Add Neovim Unstable PPA and update
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
+
+# Install Neovim, Build Essentials, and Search Tools
 sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find unzip -y
-# This tells Ubuntu: "When I (or a plugin) type 'fd', run 'fdfind'"
+
+# Install Node.js & npm (Required for Mason and many LSPs)
+sudo apt install nodejs npm -y
+
+# Install C++ Development tools for ROS 2
+sudo apt install clang-format clangd -y
+
+# Fix the fd-find naming convention for Neovim plugin compatibility
 sudo ln -s $(which fdfind) /usr/local/bin/fd
-```
 
-
-```bash
+# Clone the LazyVim starter template
 git clone https://github.com/LazyVim/starter ~/.config/nvim
+
+# Clean up git history to allow for your own configuration tracking
+rm -rf ~/.config/nvim/.git
 ```
 
 ### 9. Shared Clipboard Support
