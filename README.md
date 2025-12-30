@@ -99,13 +99,15 @@ sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 
 # Install Neovim, Build Essentials, and Search Tools
-sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find unzip -y
+# Added: cmake, gettext, ninja-build, tar, wget (essential for building/extracting plugins)
+sudo apt install neovim git curl build-essential python3-venv python3-pip ripgrep fd-find unzip cmake gettext ninja-build tar wget -y
 
 # Install Node.js & npm (Required for Mason and many LSPs)
 sudo apt install nodejs npm -y
 
 # Install C++ Development tools for ROS 2
-sudo apt install clang-format clangd -y
+# Added: clang, clang-tidy, gdb (for full development/debugging suite)
+sudo apt install clang clang-tidy clang-format clangd gdb -y
 
 # Fix the fd-find naming convention for Neovim plugin compatibility
 sudo ln -s $(which fdfind) /usr/local/bin/fd
