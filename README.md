@@ -97,6 +97,8 @@ Install Neovim and dependencies inside the container.
 sudo add-apt-repository ppa:neovim-ppa/unstable -y
 sudo apt update
 sudo apt install neovim git curl build-essential python3-venv ripgrep fd-find unzip -y
+# This tells Ubuntu: "When I (or a plugin) type 'fd', run 'fdfind'"
+sudo ln -s $(which fdfind) /usr/local/bin/fd
 ```
 
 
