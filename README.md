@@ -29,7 +29,7 @@ xhost +local:docker
 Initialize an Ubuntu 24.04 container with a dedicated home directory.
 
 ```bash
-distrobox create --image ubuntu:24.04 --name ros-jazzy --home ~/distrobox/ros-jazzy-home --init
+distrobox create --image ubuntu:24.04 --name ros-jazzy --home ~/distrobox/ubuntu-dot-files --init
 
 ```
 
@@ -164,3 +164,57 @@ if [ -f "$HOME/armbot/install/setup.bash" ]; then
 fi
 
 ```
+
+### 12. build complie commands so lsp works with this bash function. use the ubuntu container.
+you could techincially keep the jsons in the home directory so all similar projects
+have the lsp ready to go!
+
+```bash
+nvim ~/.bashrc
+```
+so in nvim copy the function belwo :w write it
+and then run it in terminal lspbuild().
+### pain point ..... have a c++ program ready as in some library headers with the cmake file.... then build
+other wise ur json will just be empty or not exist (this messed me up before)
+
+```bash
+lspbuild() {
+    # 1. Run the build with the special flag
+    echo "Building with colcon..."
+    colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "$@"
+    
+    # 2. Handle C++ (compile_commands.json)
+    # Uses fd if available (faster), falls back to find
+    if command -v fd &> /dev/null; then
+        target=$(fd -I "compile_commands.json" build/ | head -n 1)
+    else
+        target=$(find build -name "compile_commands.json" | head -n 1)
+    fi
+
+    if [ -n "$target" ]; then
+        ln -sf "$target" ./compile_commands.json
+        echo "Linked C++ compilation database."
+    else
+        echo "compile_commands.json not found!"
+        echo "Make sure you create and build a C++ package first."
+    fi
+
+    # 3. Handle Python (pyrightconfig.json)
+    if [ ! -f "pyrightconfig.json" ]; then
+        echo "pyrightconfig.json missing. Creating it for ROS 2 Jazzy..."
+        cat > pyrightconfig.json << EOF
+{
+  "extraPaths": [
+    "/opt/ros/jazzy/lib/python3.12/site-packages",
+    "install/lib/python3.12/site-packages"
+  ],
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic"
+}
+EOF
+        echo "Created pyrightconfig.json"
+    fi
+}
+```
+
+
