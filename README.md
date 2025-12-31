@@ -178,7 +178,7 @@ and then run it in terminal lspbuild().
 other wise ur json will just be empty or not exist (this messed me up before)
 
 ```bash
-lspbuild() {
+rosbuild() {
     # 1. Run the build with the special flag
     echo "Building with colcon..."
     colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON "$@"
